@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slot Floor Review | The Gilded Ace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#f6f7fa;--card:#ffffff;--ink:#14213d;--ink2:#3c4963;--muted:#66728a;--line:#dde2ec;--grid:#e8ecf3;--track:#eef1f6;
+  --accent:#e4572e;--accent-soft:#fff1ec;--amber:#f2b134;--teal:#1b998b;
+  --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s7:#6250d6;--s8:#e34948;--good:#177a6e;--bad:#c23b3a;
+  --chev:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%2366728a' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0d1220;--card:#151c30;--ink:#eef1f8;--ink2:#c4cce0;--muted:#8d99b5;--line:#252e48;--grid:#1f2840;--track:#1c2540;
+  --accent:#ff7a52;--accent-soft:#2a1d1a;--amber:#f2b134;--teal:#3cc4b3;
+  --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s7:#9085e9;--s8:#e66767;--good:#4fd0bd;--bad:#ff8785;
+  --chev:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%238d99b5' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Manrope,system-ui,sans-serif}
+h1,h2,h3,.num{font-family:"Space Grotesk",Manrope,sans-serif}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+/* top bar */
+.bar{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40}
+.bar .wrap{display:flex;align-items:center;gap:20px;height:54px}
+.word{font:700 13px "Space Grotesk",sans-serif;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.word i{font-style:normal;color:var(--accent)}
+.steps{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1}
+.steps a{color:var(--muted);text-decoration:none;font-size:13px;padding:6px 10px;border-radius:8px;white-space:nowrap;display:flex;gap:6px;align-items:center}
+.steps a b{display:none}
+.steps a:hover{color:var(--ink)}.steps a.on{color:var(--ink);background:var(--track)}
+.theme{flex:none;display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink2);border-radius:99px;padding:4px 6px 4px 12px;font-size:12px;cursor:pointer}
+.theme .knob{width:34px;height:20px;border-radius:99px;background:var(--line);position:relative;transition:background .15s}
+.theme .knob::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--card);box-shadow:0 1px 2px rgba(0,0,0,.3);transition:transform .15s}
+:root[data-theme="dark"] .theme .knob{background:var(--accent)}
+:root[data-theme="dark"] .theme .knob::after{transform:translateX(14px)}
+/* header */
+.head1{padding:24px 0 14px}
+.eyebrow{font:600 12px "Space Grotesk",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:40px;line-height:1.1;margin:6px 0 6px;font-weight:700;letter-spacing:-.02em}
+.lead{font-size:16px;color:var(--muted);margin:0}
+/* filter bar */
+.fbar{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:sticky;top:54px;z-index:30}
+.fgrid{display:grid;grid-template-columns:150px 150px minmax(300px,1fr) 190px auto;gap:14px;align-items:end;padding-top:10px;padding-bottom:10px}
+.f label,.f .lbl{display:block;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.f select,.f input[type=date]{width:100%;height:38px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:13px;border-radius:8px;padding:0 10px;cursor:pointer;outline:none}
+.f select{appearance:none;-webkit-appearance:none;background-image:var(--chev);background-repeat:no-repeat;background-position:right 11px center;padding-right:32px}
+.f input[type=date]{padding-right:8px}
+.f select:focus,.f input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent)}
+select option{background:var(--card);color:var(--ink)}
+.seg{display:flex;height:38px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--bg)}
+.seg button{flex:1;border:0;background:transparent;color:var(--ink2);font:inherit;font-size:13px;cursor:pointer;border-right:1px solid var(--line);padding:0 8px}
+.seg button:last-child{border-right:0}
+.seg button:disabled{color:var(--muted);opacity:.45;cursor:not-allowed;background:repeating-linear-gradient(135deg,transparent 0 6px,var(--track) 6px 7px)}
+.seg button:hover{background:var(--track)}
+.seg button.on{background:var(--ink);color:var(--card);font-weight:600}
+.btn{height:38px;border:1px solid var(--line);background:var(--bg);color:var(--ink2);border-radius:8px;padding:0 16px;font-size:13px;cursor:pointer}
+.btn:hover{border-color:var(--muted)}
+.hint{font-size:12px;color:var(--muted);padding:0 0 8px;min-height:20px}
+button{font:inherit;color:inherit}
+/* sections */
+main{padding-bottom:40px}
+.sec{margin-top:36px;scroll-margin-top:150px}
+.shead{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px}
+.shead .n{flex:none;width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--card);display:grid;place-items:center;font:700 15px "Space Grotesk"}
+h2{font-size:26px;line-height:1.2;margin:0;letter-spacing:-.015em;font-weight:600}
+h3{font-size:15px;margin:0;font-weight:600}
+.why{color:var(--muted);margin:3px 0 0;font-size:14px}
+.sub{color:var(--muted);font-size:13px;margin:2px 0 0}
+.sowhat{margin:12px 0 0;padding:12px 16px;border-left:4px solid var(--accent);background:var(--card);border-radius:0 10px 10px 0;font-size:15px;color:var(--ink2)}
+.sowhat b{color:var(--ink)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-width:0}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}
+.ch{position:relative;height:250px}.ch.tall{height:300px}.ch.short{height:210px}.ch.mini{height:190px}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px}
+.tiles.t3{grid-template-columns:repeat(3,1fr)}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.tile .num{font-size:28px;font-weight:600;letter-spacing:-.02em}
+.tile .lab{font-size:13px;color:var(--ink);margin-top:2px}.tile .foot{font-size:12px;color:var(--muted)}
+details.more{margin-top:16px}
+details.more>summary{cursor:pointer;list-style:none;display:inline-flex;gap:8px;align-items:center;font-size:13px;font-weight:600;color:var(--ink2);padding:8px 14px;border:1px solid var(--line);border-radius:99px;background:var(--card)}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::before{content:"+";font-weight:700}
+details.more[open]>summary::before{content:"–"}
+details.more>.body{margin-top:14px}
+.step{margin-top:16px}
+.step>.lbl{display:flex;gap:10px;align-items:center;margin-bottom:8px;font-weight:600;font-size:15px}
+.step>.lbl i{font-style:normal;font:700 12px "Space Grotesk";background:var(--track);color:var(--ink2);border-radius:99px;padding:2px 9px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:right;font-weight:600;color:var(--muted);padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap;font-size:12px}
+td{padding:9px 10px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;text-align:right;vertical-align:middle}
+th:first-child,td:first-child,.l{text-align:left}
+.scroll{overflow-x:auto}
+.cell{position:relative;min-width:92px}
+.cell.top span.v{font-weight:700}
+.cell .na{color:var(--muted)}
+.cell span.v{position:relative}
+.pill{display:inline-block;background:var(--track);color:var(--ink2);padding:3px 9px;border-radius:8px;font-size:12px;font-weight:500;line-height:1.3;margin:1px 0}
+.pill.bad{background:var(--accent);color:#fff;font-weight:700}
+.mini-f{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 14px}
+.mini-f .f{width:180px}
+.tbtn{font-size:11px;border:1px solid var(--line);background:transparent;border-radius:6px;padding:2px 8px;color:var(--muted);cursor:pointer}
+.tbtn.on{background:var(--ink);color:var(--card)}
+.tbl-view{display:none;max-height:240px;overflow:auto;margin-top:8px}
+.def{font-size:13px;color:var(--ink2)}.def b{color:var(--ink)}
+.note{font-size:12px;color:var(--muted);margin-top:8px}
+.plan{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:p;margin-top:16px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;position:relative;counter-increment:p}
+.pc::before{content:counter(p);position:absolute;top:16px;right:20px;font:700 44px "Space Grotesk";color:var(--track)}
+.pc .cost{font:700 30px "Space Grotesk";letter-spacing:-.02em}
+.pc h3{font-size:17px;margin:2px 0 4px}
+.pc .what{font-size:13px;color:var(--muted);margin:0 0 12px;max-width:85%}
+.pc dl{margin:0;font-size:13px}.pc dt{color:var(--muted);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-top:10px}.pc dd{margin:2px 0 0}
+.pc .gain{color:var(--good);font-weight:700}
+.pc a{color:var(--s1);font-size:12px}
+.final{margin-top:20px;background:var(--accent-soft);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:14px;padding:20px 26px}
+.final h3{font:700 12px "Space Grotesk";letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.final ol{margin:0;padding-left:20px;font-size:16px}.final li{margin:6px 0}
+.pos{color:var(--good)}.neg{color:var(--bad)}
+code{background:var(--track);padding:0 4px;border-radius:4px;font-size:12px}
+footer{color:var(--muted);font-size:12px;padding:10px 0 50px}
+@media(max-width:980px){.fgrid{grid-template-columns:1fr 1fr}.fgrid .span2{grid-column:1/-1}}
+@media(max-width:900px){.tiles,.tiles.t3{grid-template-columns:repeat(2,1fr)}.g2,.g3,.plan{grid-template-columns:1fr}h1{font-size:30px}.word{display:none}}
+</style>
+</head>
+<body>
+<div class="bar"><div class="wrap"><div class="word">Gilded Ace <i>/</i> Floor Review</div>
+  <nav class="steps" id="steps">
+    <a href="#s1"><b>1</b>Floor</a><a href="#s2"><b>2</b>Demand</a><a href="#s3"><b>3</b>Downtime</a><a href="#s4"><b>4</b>The 10</a>
+    <a href="#s5"><b>5</b>Guests</a><a href="#s6"><b>6</b>Comps</a><a href="#s7"><b>7</b>Models</a><a href="#s8"><b>8</b>Budget</a><a href="#s9">Appendix</a>
+  </nav>
+  <button class="theme" id="themeBtn" aria-label="Switch between light and dark theme"><span id="themeLbl">Light</span><span class="knob"></span></button></div></div>
+
+<header class="head1"><div class="wrap">
+  <div class="eyebrow">The Gilded Ace</div>
+  <h1>Slot Floor Review</h1>
+  <p class="lead">Machine performance, January to June 2025</p>
+</div></header>
+
+<div class="fbar"><div class="wrap">
+  <div class="fgrid">
+    <div class="f"><label for="d0">From</label><input type="date" id="d0" min="2025-01-01" max="2025-06-30"></div>
+    <div class="f"><label for="d1">To</label><input type="date" id="d1" min="2025-01-01" max="2025-06-30"></div>
+    <div class="f span2"><span class="lbl">View by</span><div class="seg" id="gran" role="group" aria-label="View by">
+      <button data-g="day">Daily</button><button data-g="week">Weekly</button><button data-g="month">Monthly</button><button data-g="quarter">Quarterly</button><button data-g="year">Yearly</button></div></div>
+    <div class="f"><label for="fZone" title="A zone is a named area of the casino floor">Zone (floor area)</label><select id="fZone"></select></div>
+    <button class="btn" id="reset">Reset</button>
+  </div>
+  <div class="hint" id="granHint"></div>
+</div></div>
+
+<main class="wrap">
+
+<section class="sec" id="s1">
+  <div class="shead"><span class="n">1</span><div><h2>Floor Performance</h2><p class="why">The casino earns about what its games are designed to keep.</p></div></div>
+  <div class="tiles" id="kpis1"></div>
+  <div class="card"><div class="head"><div><h3 id="t1">Money the house kept</h3><p class="sub">House win = wagered minus paid out. Dashed line = what the games are designed to keep.</p></div></div><div class="ch"><canvas id="cTrend"></canvas></div></div>
+  <p class="sowhat" id="sw1"></p>
+  <details class="more"><summary>Earnings by Zone</summary><div class="body"><div class="card"><div class="head"><div><h3>House win per machine per day, by zone</h3><p class="sub">A zone is a named area of the casino floor. Click a column to filter the page to it.</p></div></div><div class="ch short"><canvas id="cZones"></canvas></div></div></div></details>
+</section>
+
+<section class="sec" id="s2">
+  <div class="shead"><span class="n">2</span><div><h2>Demand</h2><p class="why">What drives how much is played.</p></div></div>
+  <div class="card"><div class="head"><div><h3>Money wagered per machine per day</h3><p class="sub">Shaded: events and the Back Forty walkway closure (red). Shown in Daily and Weekly views.</p></div></div><div class="ch"><canvas id="cDaily"></canvas></div></div>
+  <p class="sowhat" id="sw2"></p>
+  <details class="more"><summary>Weekdays, Events and the Back Forty Closure</summary><div class="body"><div class="grid g3">
+    <div class="card"><div class="head"><h3>Busiest weekdays</h3></div><div class="ch mini"><canvas id="cWd"></canvas></div></div>
+    <div class="card"><div class="head"><div><h3>Event lift in play</h3><p class="sub">vs. a normal day</p></div></div><div class="ch mini"><canvas id="cEv"></canvas></div></div>
+    <div class="card"><div class="head"><div><h3>Back Forty vs. rest of floor</h3><p class="sub" id="b40Note"></p></div></div><div class="ch mini"><canvas id="cB40"></canvas></div></div>
+  </div><div class="card" style="margin-top:16px"><div class="head"><h3>Monthly numbers</h3></div><div class="scroll"><table id="tMonthly"></table></div></div></div></details>
+</section>
+
+<section class="sec" id="s3">
+  <div class="shead"><span class="n">3</span><div><h2>Downtime</h2><p class="why">Machines out of service cannot earn.</p></div></div>
+  <div class="tiles t3" id="kpis3"></div>
+  <div class="card"><div class="head"><div><h3>Win lost to machines out of service</h3><p class="sub">Estimated from each machine's own earning rate, per day.</p></div></div><div class="ch"><canvas id="cLost"></canvas></div></div>
+  <p class="sowhat" id="sw3"></p>
+  <details class="more"><summary>Breakdowns, Technicians and Time of Day</summary><div class="body"><div class="grid g3">
+    <div class="card"><div class="head"><div><h3>Breakdowns per month</h3><p class="sub">Whole floor, monthly</p></div></div><div class="ch mini"><canvas id="cFaults"></canvas></div></div>
+    <div class="card"><div class="head"><div><h3>Technician cover</h3><p class="sub">Whole floor. Share of planned technicians who worked.</p></div></div><div class="ch mini"><canvas id="cTech"></canvas></div></div>
+    <div class="card"><div class="head"><div><h3>By hour of day</h3><p class="sub">Whole floor. Share of machine-hours unavailable.</p></div></div><div class="ch mini"><canvas id="cHour"></canvas></div></div>
+  </div></div></details>
+</section>
+
+<section class="sec" id="s4">
+  <div class="shead"><span class="n">4</span><div><h2>The 10 Lowest Machines</h2><p class="why">Management's list, tested one reason at a time.</p></div></div>
+  <div class="mini-f">
+    <div class="f"><label for="fBank">Bank</label><select id="fBank"></select></div>
+    <div class="f"><label for="fTheme">Game</label><select id="fTheme"></select></div>
+    <div class="f"><label for="fMfr">Manufacturer</label><select id="fMfr"></select></div>
+  </div>
+  <div class="step"><div class="lbl"><i>A</i>Management's list</div>
+    <div class="card"><div class="ch tall"><canvas id="cList"></canvas></div></div></div>
+  <div class="step"><div class="lbl"><i>B</i>Reasons each machine is low</div>
+    <div class="card"><p class="def" style="margin:0 0 10px">Dollars of each machine's gap behind a typical machine, by reason. In each row the darkest cell is the main reason.</p>
+      <div class="scroll"><table id="tWhy"></table></div></div></div>
+  <div class="step"><div class="lbl"><i>C</i>Machine versus luck</div>
+    <div class="grid g2">
+      <div class="card"><div class="head"><div><h3>All machines: draw and luck</h3><p class="sub">Right = busier than similar machines. Below 0 = unluckier than average.</p></div></div><div class="ch"><canvas id="cScatter"></canvas></div></div>
+      <div class="card"><div class="head"><div><h3>M-1158 payout rate</h3><p class="sub">Share of spins that pay anything, by month.</p></div></div><div class="ch"><canvas id="cLeak"></canvas></div><div class="def" id="leakNote" style="margin-top:8px"></div></div>
+    </div></div>
+  <div class="step"><div class="lbl"><i>D</i>Replacement test (July estimate from Model 2)</div>
+    <div class="card"><div class="head"><div><h3>Expected gain from swapping each machine for another game</h3><p class="sub">First 16 operating days of July, for the 10 lowest over Jan–Jun. Dashed line = lease cost ($3,380).</p></div></div><div class="ch"><canvas id="cRepl"></canvas></div><div class="def" id="replNote" style="margin-top:8px"></div></div></div>
+  <p class="sowhat" id="sw4"></p>
+</section>
+
+<section class="sec" id="s5">
+  <div class="shead"><span class="n">5</span><div><h2>Guests</h2><p class="why">Loyalty-card players only (about two-thirds of play). Data is monthly.</p></div></div>
+  <div class="mini-f">
+    <div class="f"><label for="gReg">Home region</label><select id="gReg"></select></div>
+    <div class="f"><label for="gAge">Age band</label><select id="gAge"></select></div>
+    <div class="f"><label for="gTier">Loyalty tier</label><select id="gTier"></select></div>
+  </div>
+  <div class="tiles" id="kpis5"></div>
+  <div class="grid g2">
+    <div class="card"><div class="head"><div><h3>Wagered and paid back by month</h3><p class="sub">Loyalty-card players</p></div></div><div class="ch"><canvas id="cPlayerM"></canvas></div></div>
+    <div class="card"><div class="head"><div><h3>Net result by month</h3><p class="sub">Paid back minus wagered. Negative = players lost.</p></div></div><div class="ch"><canvas id="cPlayerNet"></canvas></div></div>
+  </div>
+  <p class="sowhat" id="sw5"></p>
+  <details class="more"><summary>Loss Concentration and Guest Groups</summary><div class="body">
+    <div class="card"><div class="head"><div><h3>Concentration of losses</h3><p class="sub">Players from largest loss to smallest. A higher curve = more concentrated.</p></div><div class="f" style="width:180px"><label for="lorGroup">Compare group</label><select id="lorGroup"></select></div></div><div class="ch short"><canvas id="cLorenz"></canvas></div><div class="def" id="concNote" style="margin-top:8px"></div></div>
+    <div class="card" style="margin-top:16px"><div class="head"><h3>Guest groups</h3></div><div class="scroll"><table id="tGroups"></table></div></div></div></details>
+</section>
+
+<section class="sec" id="s6">
+  <div class="shead"><span class="n">6</span><div><h2>Comps</h2><p class="why">What free items cost, and what changed.</p></div></div>
+  <div class="card"><div class="head"><div><h3>Points a guest pays for $1 of free items</h3><p class="sub">Weekly. Lower = comps are cheaper for guests.</p></div></div><div class="ch"><canvas id="cPpf"></canvas></div></div>
+  <p class="sowhat" id="sw6"></p>
+  <details class="more"><summary>Cost per Dollar Wagered, Before and After</summary><div class="body"><div class="grid g2">
+    <div class="card"><div class="head"><div><h3>Comp cost per $1,000 wagered</h3><p class="sub">Shaded: after April 28.</p></div></div><div class="ch short"><canvas id="cCompCost"></canvas></div></div>
+    <div class="card"><div class="head"><h3>Before and after April 28</h3></div><div class="scroll"><table id="tComp"></table></div><div class="def" id="compNote" style="margin-top:8px"></div></div>
+  </div></div></details>
+</section>
+
+<section class="sec" id="s7">
+  <div class="shead"><span class="n">7</span><div><h2>Forecast Models</h2><p class="why">Trained on January to April, tested on May to June.</p></div></div>
+  <div class="grid g2">
+    <div class="card"><div class="head"><div><h3>Model 1: daily wagering for the whole floor</h3><p class="sub">Weekday pattern × recent level. Shaded = test period.</p></div></div><div class="ch"><canvas id="cFc"></canvas></div><div class="scroll" style="margin-top:10px"><table id="tFc"></table></div><div class="note" id="fcExtra"></div></div>
+    <div class="card"><div class="head"><div><h3>Model 2: expected play for each machine</h3><p class="sub">Gradient-boosted trees. Each dot is one machine's total over the 61 test days.</p></div></div><div class="ch"><canvas id="cMach"></canvas></div><div class="scroll" style="margin-top:10px"><table id="tMM"></table></div><div class="note" id="mmNote"></div></div>
+  </div>
+  <p class="sowhat" id="sw7"></p>
+  <details class="more"><summary>July Forecast and Leakage Checks</summary><div class="body"><div class="grid g2">
+    <div class="card"><div class="head"><div><h3>July forecast of daily wagering</h3><p class="sub">Model 1 refit on Jan–Jun. Fri–Sun highlighted.</p></div></div><div class="ch short"><canvas id="cJuly"></canvas></div></div>
+    <div class="card"><div class="head"><h3>Leakage checks</h3></div><div class="def" id="leakGuard"></div></div>
+  </div></div></details>
+</section>
+
+<section class="sec" id="s8">
+  <div class="shead"><span class="n">8</span><div><h2>Budget Plan</h2><p class="why">Up to three actions for July 1–30, or keep the money.</p></div></div>
+  <div class="card"><div class="head"><div><h3>The $100,000 budget</h3><p class="sub">Three actions; the rest is kept.</p></div></div><div class="ch" style="height:120px"><canvas id="cBudget"></canvas></div></div>
+  <div class="plan" id="planCards"></div>
+  <div class="final" id="finalBox"></div>
+  <details class="more"><summary>Scenarios, Options Turned Down and Full Plan</summary><div class="body">
+    <div class="grid g2">
+      <div class="card"><div class="head"><div><h3>Expected gain after cost</h3><p class="sub">Low, base and high scenarios</p></div></div><div class="ch short"><canvas id="cScen"></canvas></div></div>
+      <div class="card"><div class="head"><h3>Considered and not chosen</h3></div><div class="scroll"><table id="tReject"></table></div></div>
+    </div>
+    <div class="card" style="margin-top:16px"><div class="head"><h3>Priced plan, assumptions and measurement</h3></div><div class="scroll"><table id="tPlan"></table></div></div>
+  </div></details>
+</section>
+
+<section class="sec" id="s9">
+  <div class="shead"><span class="n">+</span><div><h2>Appendix: Evidence and Method</h2><p class="why">Where each claim comes from, and its limits.</p></div></div>
+  <details class="more"><summary>Claims and Evidence</summary><div class="body"><div class="card"><div class="scroll"><table id="tClaims"></table></div></div></div></details>
+  <details class="more"><summary>Definitions and Method</summary><div class="body"><div class="card" id="methodText"></div></div></details>
+  <details class="more"><summary>AI-Use Disclosure</summary><div class="body"><div class="card" id="aiText"></div></div></details>
+</section>
+
+<footer>Fictional casino with synthetic data. Unusual payouts are leads to inspect, not proof of wrongdoing.</footer>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
