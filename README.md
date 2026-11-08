@@ -8,11 +8,9 @@ Interactive dashboard for the TAMU Datathon "Dashboard Royale" challenge: should
 | File | Purpose |
 |---|---|
 | `index.html` | The dashboard (single self-contained file, data included) |
-| `WRITEUP.md` | Write-up (under 400 words) |
-| `APPENDIX.md` | Claims & Evidence table, priced actions, AI-use disclosure |
 | `code/build_data.py` | Reads the challenge data, fits both models, writes the numbers the dashboard uses |
 | `code/make_standalone.py` | Packs the page and its data into one HTML file |
-| `code/make_appendix.py` | Writes `APPENDIX.md` from `code/results.json` |
+| `code/make_appendix.py` | Writes the Claims & Evidence appendix from `code/results.json` (the appendix itself is submitted on Devpost) |
 | `code/results.json` | Every headline number, as produced by `build_data.py` |
 | `requirements.txt` | Python packages (Python 3.11 or newer) |
 
@@ -32,4 +30,4 @@ python -m venv .venv && .venv/bin/pip install -r submission/requirements.txt
 The page is rebuilt at `submission/dashboard/dashboard-royale.html`.
 
 ## AI use
-Claude (Anthropic) assisted with the code and drafting. See `APPENDIX.md` for the full disclosure.
+Claude (Anthropic) assisted with the code and drafting. The full disclosure is in the appendix submitted on Devpost.
