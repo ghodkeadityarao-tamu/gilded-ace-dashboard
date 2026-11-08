@@ -1,23 +1,35 @@
-# Submission: Slot Floor Review (Dashboard Royale)
+# Slot Floor Review (Dashboard Royale)
 
-## Open the dashboard
-- **Single file:** open `dashboard/dashboard-royale.html` in any modern browser. It needs internet to load Chart.js and fonts. No other software.
-- **Or serve it:** `cd dashboard && python3 -m http.server 8000`, then open http://localhost:8000/index.html
+Interactive dashboard for the TAMU Datathon "Dashboard Royale" challenge: should The Gilded Ace replace its 10 lowest-earning slot machines? The casino and its data are fictional and synthetic.
 
-## Files
-- `WRITEUP.md`: the write-up (under 400 words)
-- `APPENDIX.md`: Claims & Evidence table, priced actions, AI-use disclosure
-- `VIDEO_SCRIPT.md`: script for the 2-minute walkthrough
-- `code/build_data.py`: reads `data/*.parquet`; fits both models; writes `dashboard/data.js` and `code/results.json`
-- `code/make_standalone.py`: inlines everything into `dashboard-royale.html`
-- `code/make_appendix.py`: writes `APPENDIX.md` from `results.json`
-- `dashboard/index.html`, `dashboard/app.js`: the dashboard source
-- `requirements.txt`: Python packages (Python 3.11+)
+**Live dashboard:** open `index.html` in a browser, or use the GitHub Pages link for this repository. It needs internet to load Chart.js and fonts. Nothing else is required, and nothing runs on a server.
 
-## Rebuild
+## What is in this repository
+| File | Purpose |
+|---|---|
+| `index.html` | The dashboard (single self-contained file, data included) |
+| `WRITEUP.md` | Write-up (under 400 words) |
+| `APPENDIX.md` | Claims & Evidence table, priced actions, AI-use disclosure |
+| `code/build_data.py` | Reads the challenge data, fits both models, writes the numbers the dashboard uses |
+| `code/make_standalone.py` | Packs the page and its data into one HTML file |
+| `code/make_appendix.py` | Writes `APPENDIX.md` from `code/results.json` |
+| `code/results.json` | Every headline number, as produced by `build_data.py` |
+| `requirements.txt` | Python packages (Python 3.11 or newer) |
+
+## Data
+The challenge tables are not included here. Get them from the challenge repository (https://github.com/tamu-datathon-org/dashboard-royale). Some of its source tables have unresolved redistribution terms, so they are deliberately not republished.
+
+## Rebuild the numbers (optional)
+1. Clone the challenge repository.
+2. Copy this repository's `code/` folder to `submission/code/` inside that clone, and `requirements.txt` to `submission/requirements.txt`.
+3. From the clone's root:
 ```
 python -m venv .venv && .venv/bin/pip install -r submission/requirements.txt
 .venv/bin/python submission/code/build_data.py
 .venv/bin/python submission/code/make_standalone.py
 .venv/bin/python submission/code/make_appendix.py
 ```
+The page is rebuilt at `submission/dashboard/dashboard-royale.html`.
+
+## AI use
+Claude (Anthropic) assisted with the code and drafting. See `APPENDIX.md` for the full disclosure.
